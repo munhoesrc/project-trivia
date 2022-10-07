@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import logo from '../trivia.png';
 import getToken from '../utils/getToken';
+import { getLogin } from '../redux/actions/index';
 
-export default class Login extends Component {
+class Login extends Component {
   state = {
     name: '',
     email: '',
@@ -13,11 +15,18 @@ export default class Login extends Component {
     this.setState({ [target.name]: target.value });
   };
 
+  emailStado = () => {
+    const { dispatch } = this.props;
+    const { name, email } = this.state;
+    dispatch(getLogin(name, email));
+  };
+
   clickButton = async (event) => {
     event.preventDefault();
     const { history } = this.props;
     await getToken();
-    history.push('/Jogo');
+    this.emailStado();
+    history.push('/game');
   };
 
   buttonConfig = (event) => {
@@ -87,4 +96,7 @@ Login.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
+
+export default connect()(Login);
