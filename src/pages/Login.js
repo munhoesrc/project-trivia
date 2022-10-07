@@ -20,6 +20,12 @@ export default class Login extends Component {
     history.push('/Jogo');
   };
 
+  buttonConfig = (event) => {
+    event.preventDefault();
+    const { history } = this.props;
+    history.push('/config');
+  };
+
   render() {
     const { name, email } = this.state;
     return (
@@ -65,6 +71,8 @@ export default class Login extends Component {
           <div>
             <button
               type="button"
+              data-testid="btn-settings"
+              onClick={ this.buttonConfig }
             >
               Configuração
             </button>
