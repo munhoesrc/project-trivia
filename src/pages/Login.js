@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import logo from '../trivia.png';
+import getToken from '../utils/getToken';
 
 export default class Login extends Component {
   state = {
@@ -9,6 +11,13 @@ export default class Login extends Component {
 
   input = ({ target }) => {
     this.setState({ [target.name]: target.value });
+  };
+
+  clickButton = async (event) => {
+    event.preventDefault();
+    const { history } = this.props;
+    await getToken();
+    history.push('/Jogo');
   };
 
   render() {
@@ -48,6 +57,7 @@ export default class Login extends Component {
               type="submit"
               data-testid="btn-play"
               disabled={ !(email.length > 0 && name.length > 0) }
+              onClick={ this.clickButton }
             >
               Play
             </button>
@@ -64,3 +74,9 @@ export default class Login extends Component {
     );
   }
 }
+
+Login.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+};
