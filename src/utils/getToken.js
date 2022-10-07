@@ -17,7 +17,4 @@ const getToken = async () => {
 //   return json;
 // };
 
-export default {
-  getToken,
-  // resultToken,
-};
+export default getToken;

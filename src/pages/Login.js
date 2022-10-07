@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import logo from '../trivia.png';
-// import getToken from '../Redux/actions/getToken';
+import getToken from '../utils/getToken';
 
 export default class Login extends Component {
   state = {
@@ -13,19 +13,10 @@ export default class Login extends Component {
     this.setState({ [target.name]: target.value });
   };
 
-  getToken = async () => {
-    const url = 'https://opentdb.com/api_token.php?command=request';
-    const response = await fetch(url);
-    const data = await response.json();
-    // console.log(data.token);
-    localStorage.setItem('token', data.token);
-    // return data.token;
-  };
-
   clickButton = async (event) => {
     event.preventDefault();
     const { history } = this.props;
-    await this.getToken();
+    await getToken();
     history.push('/Jogo');
   };
 
