@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import logo from '../trivia.png';
+import { getToken, resultToken } from '../Redux/actions/getToken';
 
 export default class Login extends Component {
   state = {
@@ -7,8 +8,17 @@ export default class Login extends Component {
     email: '',
   };
 
+  componentDidMount() {
+    // getToken();
+    resultToken();
+  }
+
   input = ({ target }) => {
     this.setState({ [target.name]: target.value });
+  };
+
+  clickButton = () => {
+    
   };
 
   render() {
