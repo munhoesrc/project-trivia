@@ -4,7 +4,10 @@ import Header from '../components/Header';
 class Game extends Component {
   render() {
     return (
-      <Header />
+      <>
+        <Header />
+        <div>Game</div>
+      </>
     );
   }
 }
