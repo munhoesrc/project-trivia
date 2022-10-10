@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { FiSettings } from 'react-icons/fi';
 import logo from '../trivia.png';
 import getToken from '../utils/getToken';
 import { getLogin } from '../redux/actions/index';
@@ -38,56 +39,58 @@ class Login extends Component {
   render() {
     const { name, email } = this.state;
     return (
-      <div>
-        <div className="App">
-          <header className="App-header">
+      <form className="main-login">
+        <main className="right-login">
+          <div className="card-login">
             <img src={ logo } className="App-logo" alt="logo" />
-          </header>
-        </div>
-        <div>
-          <label htmlFor="nomeLabel">
-            Nome
-            <input
-              type="text"
-              name="name"
-              value={ name }
-              onChange={ this.input }
-              id="nomeLabel"
-              data-testid="input-player-name"
-            />
-          </label>
-          <label htmlFor="emailLabel">
-            Email
-            <input
-              type="email"
-              value={ email }
-              name="email"
-              id="emailLabel"
-              onChange={ this.input }
-              data-testid="input-gravatar-email"
-            />
-          </label>
-          <div>
+            <div className="textfield">
+              <span>Nome</span>
+              <input
+                placeholder="Digite seu nome"
+                type="text"
+                name="name"
+                value={ name }
+                onChange={ this.input }
+                id="nomeLabel"
+                data-testid="input-player-name"
+              />
+              <br />
+              <span>Email</span>
+              <input
+                placeholder="Digite seu email"
+                type="email"
+                value={ email }
+                name="email"
+                id="emailLabel"
+                onChange={ this.input }
+                data-testid="input-gravatar-email"
+              />
+            </div>
+
             <button
+              className="btn-login"
               type="submit"
               data-testid="btn-play"
               disabled={ !(email.length > 0 && name.length > 0) }
               onClick={ this.clickButton }
             >
               Play
+
             </button>
-          </div>
-          <div>
+
             <button
+              className="btn-settings"
               type="button"
               data-testid="btn-settings"
               onClick={ this.buttonConfig }
             >
-              Configuração
+              <FiSettings fontSize="20" />
+
             </button>
+
           </div>
-        </div>
-      </div>
+        </main>
+      </form>
     );
   }
 }
