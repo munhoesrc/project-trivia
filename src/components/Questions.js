@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { setScore } from '../redux/actions/';
 
 class Perguntas extends Component {
   state = {
@@ -10,6 +11,7 @@ class Perguntas extends Component {
     disabledButton: false,
     time: 30,
     endTime: 0,
+    score: 0,
   };
 
   componentDidMount() {
@@ -39,6 +41,14 @@ class Perguntas extends Component {
     }
   };
 
+  stopTimer = () => {
+    const { endTime, time } = this.state;
+    clearTimeout(endTime);
+    this.setState({ disabledButton: true });
+    console.log(time);
+    // this.setState({ btnDasRespostas: true });
+  };
+
   getArray = (array) => {
     let index = array.length;
 
@@ -51,17 +61,46 @@ class Perguntas extends Component {
   };
 
   handleClick = () => {
+    const { dispatch } = this.props;
+    const { score } = this.state;
     this.setState({ btnDasRespostas: true });
+    this.stopTimer();
+    this.pontuacao();
+    dispatch(setScore(score));
+  };
+  // 10 + (timer * dificuldade)
+  // hard: 3, medium: 2, easy: 1
+
+  pontuacao = () => {
+    const numero10 = 10;
+    const numero3 = 3;
+    const numero2 = 2;
+    const numero1 = 1;
+    const { time, score, idPergunta } = this.state;
+    const { perguntas } = this.props;
+    console.log(perguntas.results[idPergunta].difficulty);
+    if (perguntas.results[idPergunta].difficulty === 'hard') {
+      this.setState({ score: score + numero10 + (time * numero3) });
+    }
+    if (perguntas.results[idPergunta].difficulty === 'medium') {
+      this.setState({ score: score + numero10 + (time * numero2) });
+    }
+    if (perguntas.results[idPergunta].difficulty === 'easy') {
+      this.setState({ score: score + numero10 + (time * numero1) });
+    }
   };
 
   render() {
     const { perguntas: { results } } = this.props;
-    const { idPergunta, respostas, btnDasRespostas, disabledButton, time } = this.state;
+    const { idPergunta, respostas, btnDasRespostas, disabledButton,
+      time, score } = this.state;
     const perguntaAtual = results[idPergunta];
     this.timerOver();
+    // this.pontuacao();
     // const { btnDasRespostas } = this.props;
     return (
       <section>
+        <h1>{score}</h1>
         <h1>{time}</h1>
         <div>
           <h1 data-testid="question-category">
@@ -120,4 +159,4 @@ Perguntas.propTypes = {
   // btnDasRespostas: PropTypes.bool.isRequired,
 };
 
-export default connect(mapStateToProps, null)(Perguntas);
+export default connect(mapStateToProps)(Perguntas);
