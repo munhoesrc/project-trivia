@@ -40,7 +40,7 @@ class Game extends Component {
         <div className="container">
           <section className="div-questions">
             { !carregando && <Questions /> }
-            {carregando && <h1>Carregando...</h1>}
+            {carregando && <div className="loading" /> }
           </section>
         </div>
       </>

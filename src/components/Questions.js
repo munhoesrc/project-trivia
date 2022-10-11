@@ -41,7 +41,7 @@ class Perguntas extends Component {
     // const { btnDasRespostas } = this.props;
     return (
       <section>
-        <div>
+        <div className="question-category">
           <h1 data-testid="question-category">
             {`Categoria: ${perguntaAtual.category}`}
           </h1>
@@ -56,7 +56,7 @@ class Perguntas extends Component {
               if (element === perguntaAtual.correct_answer) {
                 return (
                   <button
-                    className={ btnDasRespostas && 'correct' }
+                    className={ btnDasRespostas ? 'correct' : 'btn-check' }
                     key={ index }
                     type="button"
                     data-testid="correct-answer"
@@ -69,7 +69,7 @@ class Perguntas extends Component {
               }
               return (
                 <button
-                  className={ btnDasRespostas && 'incorrect' }
+                  className={ btnDasRespostas ? 'incorrect' : 'btn-check' }
                   key={ index }
                   type="button"
                   data-testid={ `wrong-answer-${index}` }
