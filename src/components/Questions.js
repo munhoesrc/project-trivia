@@ -7,6 +7,9 @@ class Perguntas extends Component {
     idPergunta: '0',
     respostas: [],
     btnDasRespostas: false,
+    disabledButton: false,
+    time: 30,
+    endTime: 0,
   };
 
   componentDidMount() {
@@ -17,7 +20,24 @@ class Perguntas extends Component {
       ...(results[idPergunta].incorrect_answers)];
     const shuffledArray = this.getArray(answerArray);
     this.setState({ respostas: [...shuffledArray] });
+    this.timer();
   }
+
+  timer = () => {
+    const ONE_SECOND = 1000;
+    const intervalo = setInterval(() => this.setState((prevState) => ({
+      time: prevState.time - 1,
+    })), ONE_SECOND);
+    this.setState({ endTime: intervalo });
+  };
+
+  timerOver = () => {
+    const { time, endTime } = this.state;
+    if (time === 0) {
+      clearTimeout(endTime);
+      this.setState({ disabledButton: true });
+    }
+  };
 
   getArray = (array) => {
     let index = array.length;
@@ -36,11 +56,13 @@ class Perguntas extends Component {
 
   render() {
     const { perguntas: { results } } = this.props;
-    const { idPergunta, respostas, btnDasRespostas } = this.state;
+    const { idPergunta, respostas, btnDasRespostas, disabledButton, time } = this.state;
     const perguntaAtual = results[idPergunta];
+    this.timerOver();
     // const { btnDasRespostas } = this.props;
     return (
       <section>
+        <h1>{time}</h1>
         <div>
           <h1 data-testid="question-category">
             {`Categoria: ${perguntaAtual.category}`}
@@ -62,6 +84,7 @@ class Perguntas extends Component {
                     data-testid="correct-answer"
                     value={ element }
                     onClick={ this.handleClick }
+                    disabled={ disabledButton }
                   >
                     {element}
                   </button>
@@ -74,6 +97,7 @@ class Perguntas extends Component {
                   type="button"
                   data-testid={ `wrong-answer-${index}` }
                   onClick={ this.handleClick }
+                  disabled={ disabledButton }
                 >
                   {element}
                 </button>
