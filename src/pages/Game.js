@@ -37,10 +37,12 @@ class Game extends Component {
     return (
       <>
         <Header />
-        <section>
-          { !carregando && <Questions /> }
-          {carregando && <h1>Carregando...</h1>}
-        </section>
+        <div className="container">
+          <section className="div-questions">
+            { !carregando && <Questions /> }
+            {carregando && <h1>Carregando...</h1>}
+          </section>
+        </div>
       </>
     );
   }
