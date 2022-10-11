@@ -109,24 +109,50 @@ body {
   color: #f0ffff94;
 }
 
-.btn-login {
-  background: #0f8;
-  border: none;
+/* BOTÃO DE PLAY PAGINA DE LOGIN */
+.btn {
+  align-self: center;
+  appearance: none;
+  background-color: transparent;
+  border: 2px solid #0f8;
   border-radius: 8px;
   box-shadow: 0 10px 40px #00ff8052;
-  color: black;
+  color: #0f8;
   cursor: pointer;
+  display: flex;
+  -ms-flex-item-align: center;
   font-family: Silkscreen , cursive;
   font-size: 15pt;
   font-weight: 700;
   letter-spacing: 3px;
+  line-height: 1;
   margin: 25px;
   outline: none;
-  padding: 16px 0;
+  padding: 16px 21%;
+  text-decoration: none;
   text-transform: uppercase;
   width: 60%;
 }
 
+.btn:hover, .btn:focus {
+  color: white;
+  outline: 0;
+}
+
+.fourth {
+  background-image: linear-gradient(45deg, #0f8 50%, transparent 50%);
+  background-position: 100%;
+  background-size: 400%;
+  border-color: #0f8;
+  color: white;
+  transition: background 300ms ease-in-out;
+}
+
+.fourth:hover {
+  background-position: 0;
+}
+
+/* BOTÃO DE CONFIGURAÇÃO  */
 .btn-settings {
   background: transparent;
   border: none;
@@ -135,7 +161,7 @@ body {
   outline: none;
 }
 
-/* BOTÃO DA RESPOSTAS PAGINA QUESTIONS */
+/* BOTÃO DAS RESPOSTAS PAGINA QUESTIONS */
 .answer-options {
   display: flex;
   flex-direction: column;

@@ -68,7 +68,7 @@ class Login extends Component {
             </div>
 
             <button
-              className="btn-login"
+              className="btn fourth"
               type="submit"
               data-testid="btn-play"
               disabled={ !(email.length > 0 && name.length > 0) }
