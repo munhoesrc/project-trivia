@@ -139,30 +139,30 @@ body {
 .answer-options {
   display: flex;
   flex-direction: column;
-  width: 20%;
   gap: 20px;
+  width: 20%;
 }
 
 .correct {
+  background: rgb(6, 240, 15);
   border: 3px solid rgb(6, 240, 15);
   border-radius: 10px;
   color: black;
+  cursor: pointer;
   font-family: Silkscreen , cursive;
   font-weight: 700;
-  background: rgb(6, 240, 15);
-  padding: 0.5em;
-  cursor: pointer;
   outline: none;
+  padding: 0.5em;
 }
 
 .incorrect {
+  background: red;
   border: 3px solid red;
   border-radius: 10px;
   color: black;
+  cursor: pointer;
   font-family: Silkscreen , cursive;
   font-weight: 700;
-  background: red;
-  padding: 0.5em;
-  cursor: pointer;
   outline: none;
+  padding: 0.5em;
 }
