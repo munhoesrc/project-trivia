@@ -1,4 +1,4 @@
-import { GET_API, GET_LOGIN, GET_PERGUNTAS } from './actionsTypes';
+import { GET_API, GET_LOGIN, GET_PERGUNTAS, SET_SCORE } from './actionsTypes';
 
 export const getApi = (token) => ({
   type: GET_API,
@@ -9,6 +9,11 @@ export const getLogin = (name, email) => ({
   type: GET_LOGIN,
   name,
   email,
+});
+
+export const setScore = (payload) => ({
+  type: SET_SCORE,
+  payload,
 });
 
 const perguntas = (payload) => ({ type: GET_PERGUNTAS, payload });
