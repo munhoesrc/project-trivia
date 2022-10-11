@@ -134,3 +134,35 @@ body {
   cursor: pointer;
   outline: none;
 }
+
+/* BOTÃO DA RESPOSTAS PAGINA QUESTIONS */
+.answer-options {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  gap: 20px;
+}
+
+.correct {
+  border: 3px solid rgb(6, 240, 15);
+  border-radius: 10px;
+  color: black;
+  font-family: Silkscreen , cursive;
+  font-weight: 700;
+  background: rgb(6, 240, 15);
+  padding: 0.5em;
+  cursor: pointer;
+  outline: none;
+}
+
+.incorrect {
+  border: 3px solid red;
+  border-radius: 10px;
+  color: black;
+  font-family: Silkscreen , cursive;
+  font-weight: 700;
+  background: red;
+  padding: 0.5em;
+  cursor: pointer;
+  outline: none;
+}
