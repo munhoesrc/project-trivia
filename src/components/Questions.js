@@ -5,13 +5,14 @@ import { setScore } from '../redux/actions/index';
 
 class Questions extends Component {
   state = {
-    idPergunta: '0',
+    idPergunta: 0,
     respostas: [],
     btnDasRespostas: false,
     disabledButton: false,
     time: 30,
     endTime: 0,
     score: 0,
+    respondeu: false,
   };
 
   componentDidMount() {
@@ -83,7 +84,7 @@ class Questions extends Component {
         soma = numero10 + (time * numero1);
       }
     }
-    this.setState({ score: soma });
+    this.setState({ score: soma, respondeu: true });
     dispatch(setScore(soma));
   };
   // 10 + (timer * dificuldade)
@@ -92,7 +93,7 @@ class Questions extends Component {
   render() {
     const { perguntas: { results } } = this.props;
     const { idPergunta, respostas, btnDasRespostas, disabledButton,
-      time, score } = this.state;
+      time, score, respondeu } = this.state;
     const perguntaAtual = results[idPergunta];
     this.timerOver();
     // this.pontuacao();
@@ -143,7 +144,15 @@ class Questions extends Component {
               );
             })
           }
-
+          { respondeu && (
+            <button
+              type="button"
+              data-testid="btn-next"
+              onClick={ () => this.setState({ idPergunta: idPergunta + 1 }) }
+            >
+              Next
+            </button>
+          )}
         </div>
       </section>
     );
