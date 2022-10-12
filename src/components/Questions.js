@@ -16,6 +16,11 @@ class Questions extends Component {
   };
 
   componentDidMount() {
+    this.respostas();
+    this.timer();
+  }
+
+  respostas = () => {
     const { perguntas: { results } } = this.props;
     const { idPergunta } = this.state;
     const answerArray = [
@@ -23,8 +28,7 @@ class Questions extends Component {
       ...(results[idPergunta].incorrect_answers)];
     const shuffledArray = this.getArray(answerArray);
     this.setState({ respostas: [...shuffledArray] });
-    this.timer();
-  }
+  };
 
   timer = () => {
     const ONE_SECOND = 1000;
@@ -90,6 +94,23 @@ class Questions extends Component {
   // 10 + (timer * dificuldade)
   // hard: 3, medium: 2, easy: 1
 
+  valideNext = () => {
+    const { history } = this.props;
+    const { idPergunta } = this.state;
+    const num = 4;
+    if (idPergunta === num) {
+      history.push('/feedback');
+    }
+    this.setState({
+      idPergunta: idPergunta + 1,
+      time: 30,
+      btnDasRespostas: false,
+      disabledButton: false,
+    }, () => this.respostas());
+    console.log(idPergunta);
+    this.timer();
+  };
+
   render() {
     const { perguntas: { results } } = this.props;
     const { idPergunta, respostas, btnDasRespostas, disabledButton,
@@ -104,11 +125,11 @@ class Questions extends Component {
         <h1>{time}</h1>
         <div>
           <h1 data-testid="question-category">
-            {`Categoria: ${perguntaAtual.category}`}
+            {`${perguntaAtual.category}`}
           </h1>
 
           <h1 data-testid="question-text">
-            {`Pergunta: ${perguntaAtual.question.replace(/(&#039;)/g, '`').replace(/(&quot;)/g, '"')}`}
+            {`${perguntaAtual.question.replace(/(&#039;)/g, '`').replace(/(&quot;)/g, '"')}`}
           </h1>
         </div>
         <div data-testid="answer-options" className="answer-options">
@@ -148,7 +169,7 @@ class Questions extends Component {
             <button
               type="button"
               data-testid="btn-next"
-              onClick={ () => this.setState({ idPergunta: idPergunta + 1 }) }
+              onClick={ this.valideNext }
             >
               Next
             </button>
@@ -166,6 +187,9 @@ const mapStateToProps = (state) => ({
 Questions.propTypes = {
   perguntas: PropTypes.objectOf(PropTypes.shape).isRequired,
   dispatch: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
   // btnDasRespostas: PropTypes.bool.isRequired,
 };
 
