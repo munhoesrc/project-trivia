@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { setScore } from '../redux/actions/index';
+import { setAcertadas, setScore } from '../redux/actions/index';
 
 class Questions extends Component {
   state = {
@@ -72,6 +72,7 @@ class Questions extends Component {
     console.log(event.target);
     const numero10 = 10;
     let soma = 0;
+    let acerto = 0;
     const numero3 = 3;
     const numero2 = 2;
     const numero1 = 1;
@@ -87,9 +88,11 @@ class Questions extends Component {
       if (perguntas.results[idPergunta].difficulty === 'easy') {
         soma = numero10 + (time * numero1);
       }
+      acerto += 1;
     }
     this.setState({ score: soma, respondeu: true });
     dispatch(setScore(soma));
+    dispatch(setAcertadas(acerto));
   };
   // 10 + (timer * dificuldade)
   // hard: 3, medium: 2, easy: 1
@@ -121,7 +124,7 @@ class Questions extends Component {
     // const { btnDasRespostas } = this.props;
     return (
       <section>
-        <h1>{score}</h1>
+        <h1 className="style-score">{score}</h1>
         <h1>{time}</h1>
         <div className="question-category">
           <h1 data-testid="question-category">

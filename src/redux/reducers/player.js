@@ -1,9 +1,10 @@
-import { GET_LOGIN, SET_SCORE } from '../actions/actionsTypes';
+import { GET_LOGIN, SET_SCORE, SET_ACERTADAS } from '../actions/actionsTypes';
 
 const INITIAL_STATE = {
   email: '',
   name: '',
   score: 0,
+  acertadas: 0,
 };
 
 const player = (state = INITIAL_STATE, action) => {
@@ -18,6 +19,11 @@ const player = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       score: state.score + action.payload,
+    };
+  case SET_ACERTADAS:
+    return {
+      ...state,
+      acertadas: state.acertadas + action.payload,
     };
   default:
     return state;
