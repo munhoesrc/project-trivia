@@ -173,6 +173,17 @@ body {
   padding: 0.5em;
 }
 
+.btn-next {
+  background: lightgray;
+  border-radius: 10px;
+  color: black;
+  cursor: pointer;
+  font-family: Silkscreen , cursive;
+  font-weight: 700;
+  outline: none;
+  padding: 0.5em;
+}
+
 .answer-options {
   display: flex;
   flex-direction: column;
