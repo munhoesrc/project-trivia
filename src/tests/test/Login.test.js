@@ -9,7 +9,7 @@ describe('Testando a aplicação Trivia:', () => {
     renderWithRouterAndRedux(<App />);
 
     const emailCorrect = 'cerveja@teste.com';
-    const nameCorrect = 'Tryber'
+    const nameCorrect = 'Tryber';
 
     const buttonPlay = screen.getByRole('button', { name: /play/i });
     const inputEmail = screen.getByTestId('input-gravatar-email');
@@ -22,40 +22,37 @@ describe('Testando a aplicação Trivia:', () => {
     userEvent.type(inputEmail, emailCorrect);
     userEvent.click(buttonPlay);
     userEvent.type(inputName, nameCorrect);
-
   });
-  it("Verificando o redirecionamento do botão configuração", async () => {
-
+  it('Verificando o redirecionamento do botão configuração', async () => {
     const { history } = renderWithRouterAndRedux(<App />);
 
-    const buttonSettings = screen.getByRole('button', { name: /configuração/i });
+    const buttonSettings = screen.getByTestId('btn-settings');
 
     expect(buttonSettings).toBeInTheDocument();
 
     userEvent.click(buttonSettings);
-    await screen.findByText('Config');
+    // await screen.findByText('Config');
 
     const { location: { pathname } } = history;
 
-    expect(pathname).toBe("/config");
+    expect(pathname).toBe('/config');
   });
-  it("Verificando o redirecionamento do botão play ", async () => {
-
+  it('Verificando o redirecionamento do botão play ', async () => {
     const { history } = renderWithRouterAndRedux(<App />);
 
-    const inputName = screen.getByTestId("input-player-name");
-    const inputEmail = screen.getByTestId("input-gravatar-email");
+    const inputName = screen.getByTestId('input-player-name');
+    const inputEmail = screen.getByTestId('input-gravatar-email');
 
     userEvent.type(inputEmail, 'cerveja@teste.com');
     userEvent.type(inputName, 'Tryber');
 
-    const buttonPlay = screen.getByTestId("btn-play");
+    const buttonPlay = screen.getByTestId('btn-play');
 
     userEvent.click(buttonPlay);
-    await screen.findByText('Game');
+    await screen.findByText('Tryber');
 
     const { location: { pathname } } = history;
 
-    expect(pathname).toBe("/game");
+    expect(pathname).toBe('/game');
   });
 });
