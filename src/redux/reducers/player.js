@@ -4,7 +4,7 @@ const INITIAL_STATE = {
   email: '',
   name: '',
   score: 0,
-  acertadas: 0,
+  assertions: 0,
 };
 
 const player = (state = INITIAL_STATE, action) => {
@@ -23,7 +23,7 @@ const player = (state = INITIAL_STATE, action) => {
   case SET_ACERTADAS:
     return {
       ...state,
-      acertadas: state.acertadas + action.payload,
+      assertions: state.assertions + action.payload,
     };
   default:
     return state;
