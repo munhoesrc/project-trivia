@@ -6,7 +6,7 @@ import logo from '../trivia.png';
 
 class Header extends Component {
   render() {
-    const { name, email } = this.props;
+    const { name, email, score } = this.props;
     const gravatar = md5(email).toString();
     return (
       <header className="header">
@@ -16,7 +16,9 @@ class Header extends Component {
           height="50"
           alt="logo"
         />
-        <h3 data-testid="header-score"> Pontos: 00 </h3>
+        <h3 data-testid="header-score">
+          {score}
+        </h3>
         <h3 data-testid="header-player-name">
           { name }
         </h3>
@@ -36,11 +38,13 @@ class Header extends Component {
 const mapStateToProps = (state) => ({
   name: state.player.name,
   email: state.player.email,
+  score: state.player.score,
 });
 
 Header.propTypes = {
   name: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
+  score: PropTypes.number.isRequired,
 };
 
 export default connect(mapStateToProps)(Header);
