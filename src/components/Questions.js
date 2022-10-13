@@ -123,7 +123,7 @@ class Questions extends Component {
       <section>
         <h1>{score}</h1>
         <h1>{time}</h1>
-        <div>
+        <div className="question-category">
           <h1 data-testid="question-category">
             {`${perguntaAtual.category}`}
           </h1>
@@ -167,11 +167,12 @@ class Questions extends Component {
           }
           { respondeu && (
             <button
+              className="btn-next"
               type="button"
               data-testid="btn-next"
               onClick={ this.valideNext }
             >
-              Next
+              Next &#62;&#62;
             </button>
           )}
         </div>
