@@ -56,3 +56,4 @@ describe('Testando a aplicação Trivia:', () => {
     expect(pathname).toBe('/game');
   });
 });
+// resolvendo conflitos
