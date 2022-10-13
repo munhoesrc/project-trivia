@@ -6,6 +6,7 @@ import Header from '../components/Header';
 class Feedback extends Component {
   playAgain = () => {
     const { history } = this.props;
+    console.log(this.props);
     history.push('/');
   };
 
