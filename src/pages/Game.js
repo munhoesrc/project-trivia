@@ -33,16 +33,15 @@ class Game extends Component {
   };
 
   render() {
+    const { history } = this.props;
     const { carregando } = this.state;
     return (
       <>
         <Header />
-        <div className="container">
-          <section className="div-questions">
-            { !carregando && <Questions /> }
-            {carregando && <div className="loading" /> }
-          </section>
-        </div>
+        <section>
+          { !carregando && <Questions history={ history } /> }
+          {carregando && <h1>Carregando...</h1>}
+        </section>
       </>
     );
   }
